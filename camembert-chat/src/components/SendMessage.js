@@ -28,6 +28,22 @@ function SendMessage() {
       )
   };
 
+  let text = "明日天気になーれ"
+  let fromLang = 'ja'
+  let toLang = 'en'
+  let apiKey = "";
+
+  // 翻訳
+  const URL = "https://translation.googleapis.com/language/translate/v2?key=" + apiKey +
+    "&q=" + encodeURI(text) + "&source=" + fromLang + "&target=" + toLang
+  let xhr = new XMLHttpRequest()
+  xhr.open('POST', [URL], false)
+  xhr.send();
+  if (xhr.status === 200) {
+    const res = JSON.parse(xhr.responseText);
+    alert(res["data"]["translations"][0]["translatedText"])
+  }
+
   return (
     <div>
       <form onSubmit={SendMessage}>
