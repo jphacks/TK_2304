@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import SingOut from "./SignOut";
+import SignOut from "./SignOut";
 import { db, auth } from "../firebase";
 import SendMessage from "./SendMessage";
+import GetMessage from "./GetMessage";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -17,7 +18,7 @@ function Chat() {
   return (
     <div>
       {console.log(messages)}
-      <SingOut></SingOut>
+      <SignOut></SignOut>
       <div className="msgs">
         {messages.map(({ id, text, photoURL, uid, translation }) => (
           <div
@@ -26,12 +27,11 @@ function Chat() {
               uid === auth.currentUser.uid ? "sent" : "recieved"
             }`}
           >
-            <img src={photoURL} alt=""></img>
-            <p>{text}</p>
-            {/* translation text */}
-            {translation && (
-              <p className="translation">Translation: {translation}</p>
-            )}
+            <img src={photoURL} alt="" />
+            <div className="message-content">
+              {translation && <p className="translation">{translation}</p>}
+              <p className="original-text">{text}</p>
+            </div>
           </div>
         ))}
       </div>
