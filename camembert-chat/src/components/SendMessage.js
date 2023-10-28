@@ -12,6 +12,7 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import ApiKey from "../ApiKey";
+import MessageSuggestion from "./MessageSuggestion";
 
 //function to fix the translated text
 function decodeHTMLEntities(text) {
@@ -84,26 +85,29 @@ function SendMessage() {
     <div>
       <form onSubmit={SendMessage}>
         <div className="sendMsg">
+          <div>
+            <MessageSuggestion></MessageSuggestion>
+          </div>
           <Grid container>
-            <p
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                fontSize: "1rem",
-                alignItems: "flex-end",
-              }}
-            >
-              language:
-            </p>
             <Grid
               item
-              xs={1}
+              xs={3}
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "flex-end",
               }}
             >
+              <p
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "1rem",
+                  alignItems: "flex-end",
+                }}
+              >
+                Language/言語:
+              </p>
               <ToggleButtonGroup
                 exclusive
                 value={selectedLanguage}
@@ -114,7 +118,7 @@ function SendMessage() {
                 <ToggleButton value="en">EN</ToggleButton>
               </ToggleButtonGroup>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={8}>
               <TextField
                 id="standard-basic"
                 variant="standard"

@@ -17,7 +17,6 @@ function Chat() {
 
   return (
     <div>
-      {console.log(messages)}
       <SignOut></SignOut>
       <div className="msgs">
         {messages.map(({ id, text, photoURL, uid, translation }) => (
