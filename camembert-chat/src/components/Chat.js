@@ -35,6 +35,7 @@ function Chat() {
           </div>
         ))}
       </div>
+      {/* <GetMessage></GetMessage> */}
       <SendMessage></SendMessage>
     </div>
   );
