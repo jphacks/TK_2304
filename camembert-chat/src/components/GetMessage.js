@@ -17,18 +17,17 @@ function Chat() {
   }, []);
 
   return (
-    <div>
-      <div className="msgs">
-        {messages.map((message, index) => (
-          <div key={index}>
-            <p>{message.text}</p>
-            {/* You can access the message text with message.text */}
-          </div>
-        ))}
-      </div>
-      <SendMessage></SendMessage>
+    <div className="msgs">
+      {messages.map((message, index) => (
+        <div key={index}>
+          <p>{message.text}</p>
+          {/* You can access the message text with message.text */}
+        </div>
+      ))}
     </div>
   );
 }
 
 export default Chat;
+
+
