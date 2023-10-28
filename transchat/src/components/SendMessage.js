@@ -3,7 +3,7 @@ import { db, auth } from "../firebase"
 import firebase from "firebase/compat/app";
 import { Button } from '@mui/base';
 import SendIcon from "@mui/icons-material/Send"
-import { Grid, IconButton, TextField } from '@mui/material';
+import { Container, Grid, IconButton, TextField } from '@mui/material';
 
 function SendMessage() {
   const [message, setMessage] = useState("");
@@ -11,6 +11,7 @@ function SendMessage() {
     e.preventDefault();
 
     if (message === "") {
+      setMessage("");
       return;
     }
 
@@ -32,7 +33,8 @@ function SendMessage() {
       <form onSubmit={SendMessage}>
         <div className='sendMsg'>
           <Grid container>
-            <Grid item>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
               <TextField
                 id="standard-basic"
                 variant="standard"
@@ -40,16 +42,15 @@ function SendMessage() {
                 type='text'
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
+                fullWidth
               />
             </Grid>
-            <Grid item>
-              <Button variant="outlined" color='primary'>
-                <IconButton>
-                  <SendIcon
-                    color='primary'
-                  />
-                </IconButton>
-              </Button>
+            <Grid item xs={1}>
+              <IconButton onClick={SendMessage}>
+                <SendIcon
+                  color='primary'
+                />
+              </IconButton>
             </Grid>
           </Grid>
         </div>
