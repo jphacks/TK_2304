@@ -3,10 +3,34 @@ import { db, auth } from "../firebase";
 import firebase from "firebase/compat/app";
 import { Button } from "@mui/base";
 import SendIcon from "@mui/icons-material/Send";
-import { Container, Grid, IconButton, TextField } from "@mui/material";
+import {
+  Container,
+  Grid,
+  IconButton,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+
+//function to fix the translated text
+function decodeHTMLEntities(text) {
+  const parser = new DOMParser();
+  const decodedString = parser.parseFromString(text, "text/html").body
+    .textContent;
+  return decodedString;
+}
 
 function SendMessage() {
-  const [message, translation, setMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("ja"); // Default to Japanese
+
+  //for selecting your own language
+  const handleLanguageChange = (event, newLanguage) => {
+    if (newLanguage !== null) {
+      setSelectedLanguage(newLanguage);
+    }
+  };
+
   const SendMessage = (e) => {
     e.preventDefault();
 
@@ -17,11 +41,36 @@ function SendMessage() {
 
     const { uid, photoURL } = auth.currentUser;
 
-    const translation = "hi"; //ここにtranslationを入力できるようにする
+    //翻訳機能
+    let language = selectedLanguage;
+    let toLang;
+    let fromLang = selectedLanguage;
+    if (selectedLanguage === "ja") toLang = "en";
+    else toLang = "ja";
+    let apiKey = "AIzaSyAu8Cpuzakt50dz1C1PXFXY_hT84nfcjIo";
+    var translation = "unable to translate";
+    const URL =
+      "https://translation.googleapis.com/language/translate/v2?key=" +
+      apiKey +
+      "&q=" +
+      encodeURI(message) +
+      "&source=" +
+      fromLang +
+      "&target=" +
+      toLang;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", [URL], false);
+    xhr.send();
+    if (xhr.status === 200) {
+      const res = JSON.parse(xhr.responseText);
+      translation = res["data"]["translations"][0]["translatedText"];
+      translation = decodeHTMLEntities(translation);
+    }
 
     db.collection("messages")
       .add({
         text: message,
+        language,
         photoURL,
         uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -35,8 +84,36 @@ function SendMessage() {
       <form onSubmit={SendMessage}>
         <div className="sendMsg">
           <Grid container>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontSize: "1rem",
+                alignItems: "flex-end",
+              }}
+            >
+              language:
+            </p>
+            <Grid
+              item
+              xs={1}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
+              <ToggleButtonGroup
+                exclusive
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+                size="small"
+              >
+                <ToggleButton value="ja">JP</ToggleButton>
+                <ToggleButton value="en">EN</ToggleButton>
+              </ToggleButtonGroup>
+            </Grid>
+            <Grid item xs={9}>
               <TextField
                 id="standard-basic"
                 variant="standard"
