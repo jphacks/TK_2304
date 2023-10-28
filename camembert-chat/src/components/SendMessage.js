@@ -47,7 +47,7 @@ function SendMessage() {
     let fromLang = selectedLanguage;
     if (selectedLanguage === "ja") toLang = "en";
     else toLang = "ja";
-    let apiKey = "AIzaSyAu8Cpuzakt50dz1C1PXFXY_hT84nfcjIo";
+    let apiKey = "";
     var translation = "unable to translate";
     const URL =
       "https://translation.googleapis.com/language/translate/v2?key=" +
