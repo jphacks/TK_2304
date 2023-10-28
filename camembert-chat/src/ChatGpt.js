@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_URL = "https://api.openai.com/v1/";
 const MODEL = "gpt-3.5-turbo";
-const API_KEY = "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";
+const API_KEY = "";
 
 const Chatgpt = () => {
   // メッセージの状態管理用のステート
