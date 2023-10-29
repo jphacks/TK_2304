@@ -26,7 +26,7 @@ function SendMessage() {
   const [message, setMessage] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("ja"); // Default to Japanese
 
-  const dict = { fr: "まじで?", wyd: "何してるん？", lmao: "www", af: "間違いない", lol: "笑", idk: "知らんがな", gg: "ナイスゲーム", brb: "すぐ帰る", ily: "愛してる♡", jk: "冗談冗談", np: "大丈夫", nw: "大丈夫", omg: "やば", omw: "もうすぐ着く", rly: "ほんと？", ty: "あざっす" };
+  const dict = { fr: "まじで?", wyd: "何してるん？", lmao: "www", af: "間違いない", lol: "笑", idk: "知らんがな", gg: "ナイスゲーム", brb: "すぐ帰る", ily: "愛してる♡", jk: "冗談冗談", np: "大丈夫", nw: "大丈夫", omg: "やば", omw: "もうすぐ着く", rly: "ほんと？", ty: "あざっす", ik: "そうだね", lil: "ちっちゃい" };
 
   //for selecting your own language
   const handleLanguageChange = (event, newLanguage) => {
@@ -53,8 +53,9 @@ function SendMessage() {
     else toLang = "ja";
     let apiKey = TranslateApi();
     var translation = "unable to translate";
-    if (dict[message] && selectedLanguage === "en") {
-      translation = dict[message];
+    const lower_case_msg = message.toLowerCase();
+    if (dict[lower_case_msg] && selectedLanguage === "en") {
+      translation = dict[lower_case_msg];
     } else {
       const URL =
         "https://translation.googleapis.com/language/translate/v2?key=" +
