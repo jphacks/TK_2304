@@ -95,4 +95,4 @@ npm install
 npm start
 ```
 ## デモ動画
-[https://youtu.be/DvdBOnqdsJY](デモ動画へのリンク)
+[デモ動画へのリンク](https://youtu.be/DvdBOnqdsJY)
