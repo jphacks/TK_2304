@@ -26,6 +26,8 @@ function SendMessage() {
   const [message, setMessage] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("ja"); // Default to Japanese
 
+  const dict = { fr: "まじで?", wyd: "何してるん？", lmao: "www", af: "間違いない", lol: "笑", idk: "知らんがな", gg: "ナイスゲーム", brb: "すぐ帰る", ily: "愛してる♡", jk: "冗談冗談", np: "大丈夫", nw: "大丈夫", omg: "やば", omw: "もうすぐ着く", rly: "ほんと？", ty: "あざっす" };
+
   //for selecting your own language
   const handleLanguageChange = (event, newLanguage) => {
     if (newLanguage !== null) {
@@ -51,22 +53,26 @@ function SendMessage() {
     else toLang = "ja";
     let apiKey = TranslateApi();
     var translation = "unable to translate";
-    const URL =
-      "https://translation.googleapis.com/language/translate/v2?key=" +
-      apiKey +
-      "&q=" +
-      encodeURI(message) +
-      "&source=" +
-      fromLang +
-      "&target=" +
-      toLang;
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", [URL], false);
-    xhr.send();
-    if (xhr.status === 200) {
-      const res = JSON.parse(xhr.responseText);
-      translation = res["data"]["translations"][0]["translatedText"];
-      translation = decodeHTMLEntities(translation);
+    if (dict[message] && selectedLanguage === "en") {
+      translation = dict[message];
+    } else {
+      const URL =
+        "https://translation.googleapis.com/language/translate/v2?key=" +
+        apiKey +
+        "&q=" +
+        encodeURI(message) +
+        "&source=" +
+        fromLang +
+        "&target=" +
+        toLang;
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", [URL], false);
+      xhr.send();
+      if (xhr.status === 200) {
+        const res = JSON.parse(xhr.responseText);
+        translation = res["data"]["translations"][0]["translatedText"];
+        translation = decodeHTMLEntities(translation);
+      }
     }
 
     db.collection("messages")
