@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { db, auth } from "../firebase";
 import { Button, CircularProgress } from "@mui/material";
-import SendMessage from "./SendMessage"
+import SendMessage from "./SendMessage";
 import ChatGPTApi from "../ChatGptApi";
 
 const API_URL = "https://api.openai.com/v1/";
@@ -26,7 +26,7 @@ const MessageSuggestion = (props) => {
 
     try {
       setAns([]);
-      const lang = (props.lang === "ja") ? "日本語" : "英語";
+      const lang = props.lang === "ja" ? "日本語" : "英語";
 
       const response = await axios.post(
         `${API_URL}chat/completions`,
@@ -39,12 +39,12 @@ const MessageSuggestion = (props) => {
             },
             {
               role: "user",
-              content: messages[0].text
+              content: messages[0].text,
             },
             {
               role: "system",
-              content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`
-            }
+              content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`,
+            },
           ],
         },
         {
@@ -55,7 +55,9 @@ const MessageSuggestion = (props) => {
           },
         }
       );
-      const answers = response.data.choices[0].message.content.trim().split("#");
+      const answers = response.data.choices[0].message.content
+        .trim()
+        .split("#");
       setAns(answers);
     } catch (e) {
       console.log("error" + e);
@@ -71,30 +73,28 @@ const MessageSuggestion = (props) => {
       .onSnapshot((snapshot) => {
         const new_msgs = snapshot.docs.map((doc) => doc.data());
         setMessages(new_msgs);
-      })
+      });
   }, []);
 
   return (
-    <div>
-      {props.lang === "ja" && (
-        <Button onClick={getResponse} >おすすめ</Button>
-      )}
-      {props.lang === "en" && (
-        <Button onClick={getResponse} >Suggestion</Button>
-      )}
-      {loading && (
-        <CircularProgress></CircularProgress>
-      )}
-      {!loading && (
-        ans.map((a) => <Button
-          variant="contained"
-          onClick={() => {
-            props.setMessage(a);
-          }}>{a}</Button>
-        )
-      )}
-    </div >
+    <div className="gpt-style">
+      {props.lang === "ja" && <Button onClick={getResponse}>おすすめ</Button>}
+      {props.lang === "en" && <Button onClick={getResponse}>Suggestion</Button>}
+      {loading && <CircularProgress size={23}></CircularProgress>}
+      {!loading &&
+        ans.map((a) => (
+          <Button
+            variant="contained"
+            onClick={() => {
+              props.setMessage(a);
+            }}
+            className="customButton"
+          >
+            {a}
+          </Button>
+        ))}
+    </div>
   );
-}
+};
 
 export default MessageSuggestion;

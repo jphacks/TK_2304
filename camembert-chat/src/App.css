@@ -98,6 +98,17 @@ p {
   height: 100vh;
 }
 
+.customButton {
+  padding: 100px;
+}
+
+.gpt-style {
+  display: flex;
+  padding-left: 4.5rem;
+  align-items: center;
+  height: 5vh;
+}
+
 @media (max-width: 775px) {
   p {
     font-size: 20px;
