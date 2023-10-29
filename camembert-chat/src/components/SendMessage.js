@@ -11,7 +11,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import ApiKey from "../ApiKey";
+import TranslateApi from "../TranslateApi";
 import MessageSuggestion from "./MessageSuggestion";
 
 //function to fix the translated text
@@ -49,7 +49,7 @@ function SendMessage() {
     let fromLang = selectedLanguage;
     if (selectedLanguage === "ja") toLang = "en";
     else toLang = "ja";
-    let apiKey = ApiKey();
+    let apiKey = TranslateApi();
     var translation = "unable to translate";
     const URL =
       "https://translation.googleapis.com/language/translate/v2?key=" +

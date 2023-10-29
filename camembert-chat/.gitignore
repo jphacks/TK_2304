@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # API key
-ApiKey.js
+TranslateApi.js
+ChatGptApi.js
