@@ -14,7 +14,7 @@ function SignOut() {
         </Grid>
         <Grid item xs={3}>
           <Button
-            style={{ color: "black", fontSize: "14px", marginTop: "18px" }}
+            style={{ color: "black", fontSize: "16px", marginTop: "10px" }}
             onClick={() => auth.signOut()}
           >
             Sign out
