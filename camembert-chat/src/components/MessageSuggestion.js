@@ -6,26 +6,26 @@ import SendMessage from "./SendMessage"
 
 const API_URL = "https://api.openai.com/v1/";
 const MODEL = "gpt-3.5-turbo";
-const API_KEY = "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";
+const API_KEY = "";
 
-const MessageSuggestion = () => {
+const MessageSuggestion = (props) => {
   const [messages, setMessages] = useState([]);
-  const [finished, setFinished] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ans, setAns] = useState([]);
 
-  const getResponse = async (new_msgs) => {
-    if (finished || loading) {
+  const getResponse = async () => {
+    if (loading) {
       return;
     }
-    if (new_msgs.length === 0) {
+    if (messages.length === 0) {
       return;
     }
+
     setLoading(true);
-    setFinished(true);
+
     try {
       setAns([]);
-      console.log(new_msgs[0].text);
+      console.log(messages[0].text);
       const response = await axios.post(
         `${API_URL}chat/completions`,
         {
@@ -37,7 +37,7 @@ const MessageSuggestion = () => {
             },
             {
               role: "user",
-              content: new_msgs[0].text
+              content: messages[0].text
             },
             {
               role: "system",
@@ -62,6 +62,8 @@ const MessageSuggestion = () => {
     }
   };
 
+  console.log(props);
+
   useEffect(() => {
     db.collection("messages")
       .orderBy("createdAt", "desc")
@@ -69,24 +71,24 @@ const MessageSuggestion = () => {
       .onSnapshot((snapshot) => {
         const new_msgs = snapshot.docs.map((doc) => doc.data());
         setMessages(new_msgs);
-        getResponse(new_msgs);
-        // setFinished(false);
       })
   }, []);
 
-  console.log(finished);
-
   return (
     <div>
-      <div>Suggestion: </div>
+      <Button onClick={getResponse} >Suggestion</Button>
       {loading && (
         <CircularProgress></CircularProgress>
       )}
       {!loading && (
-        ans.map((a) => <Button variant="contained">{a}</Button>
+        ans.map((a) => <Button
+          variant="contained"
+          onClick={() => {
+            props.setMessage(a);
+          }}>{a}</Button>
         )
       )}
-    </div>
+    </div >
   );
 }
 

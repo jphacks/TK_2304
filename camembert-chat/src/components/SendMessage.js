@@ -86,7 +86,7 @@ function SendMessage() {
       <form onSubmit={SendMessage}>
         <div className="sendMsg">
           <div>
-            <MessageSuggestion></MessageSuggestion>
+            <MessageSuggestion setMessage={setMessage}></MessageSuggestion>
           </div>
           <Grid container>
             <Grid
