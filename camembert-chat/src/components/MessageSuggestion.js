@@ -24,28 +24,55 @@ const MessageSuggestion = (props) => {
 
     setLoading(true);
 
+    console.log(messages);
+
     try {
       setAns([]);
       const lang = (props.lang === "ja") ? "日本語" : "英語";
+
+      var msgs = {};
+
+      if (messages > 2) {
+        msgs = [
+          {
+            role: "user",
+            content: `以下の連続した会話に対する適切な返答を${lang}語で1つ考えなさい.`,
+          },
+          {
+            role: "user",
+            content: messages[0].text
+          },
+          {
+            role: "system",
+            content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`
+          },
+          {
+            role: "assistant",
+            content: `2つ前のメッセージ: ${messages[1].txt}  3つ前のメッセージ: ${messages[2].txt}`
+          }
+        ];
+      } else {
+        msgs = [
+          {
+            role: "user",
+            content: `以下の連続した会話に対する適切な返答を${lang}語で1つ考えなさい.`,
+          },
+          {
+            role: "user",
+            content: messages[0].text
+          },
+          {
+            role: "system",
+            content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`
+          }
+        ]
+      }
 
       const response = await axios.post(
         `${API_URL}chat/completions`,
         {
           model: MODEL,
-          messages: [
-            {
-              role: "user",
-              content: `以下の連続した会話に対する適切な返答を${lang}語で1つ考えなさい.`,
-            },
-            {
-              role: "user",
-              content: messages[0].text
-            },
-            {
-              role: "system",
-              content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`
-            }
-          ],
+          messages: msgs,
         },
         {
           // HTTPヘッダー(認証)
@@ -56,7 +83,14 @@ const MessageSuggestion = (props) => {
         }
       );
       const answers = response.data.choices[0].message.content.trim().split("#");
-      setAns(answers);
+      let new_answers = [];
+      answers.forEach(element => {
+        element.trim();
+        if (element != "") {
+          new_answers.push(element);
+        }
+      });
+      setAns(new_answers);
     } catch (e) {
       console.log("error" + e);
     } finally {
