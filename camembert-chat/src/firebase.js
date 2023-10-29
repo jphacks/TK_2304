@@ -3,12 +3,12 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore"
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyDahIObdF9B3-3Q_boEZ5k9hKI-K8y-qaQ",
-  authDomain: "camembert-chat.firebaseapp.com",
-  projectId: "camembert-chat",
-  storageBucket: "camembert-chat.appspot.com",
-  messagingSenderId: "376714984254",
-  appId: "1:376714984254:web:91e54c3d45be3f23cfca6f"
+  apiKey: "AIzaSyC5xbJ619RaksYsxp4BM016YLtIu-CXnTg",
+  authDomain: "translate-chat-d8dc9.firebaseapp.com",
+  projectId: "translate-chat-d8dc9",
+  storageBucket: "translate-chat-d8dc9.appspot.com",
+  messagingSenderId: "1060925311170",
+  appId: "1:1060925311170:web:9e542848b54c7cdca1535b"
 });
 
 const db = firebaseApp.firestore();
