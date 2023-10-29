@@ -86,7 +86,7 @@ function SendMessage() {
       <form onSubmit={SendMessage}>
         <div className="sendMsg">
           <div>
-            <MessageSuggestion setMessage={setMessage}></MessageSuggestion>
+            <MessageSuggestion setMessage={setMessage} lang={selectedLanguage}></MessageSuggestion>
           </div>
           <Grid container>
             <Grid

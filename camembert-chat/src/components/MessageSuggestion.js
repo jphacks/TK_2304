@@ -26,7 +26,8 @@ const MessageSuggestion = (props) => {
 
     try {
       setAns([]);
-      console.log(messages[0].text);
+      const lang = (props.lang === "ja") ? "日本語" : "英語";
+
       const response = await axios.post(
         `${API_URL}chat/completions`,
         {
@@ -34,7 +35,7 @@ const MessageSuggestion = (props) => {
           messages: [
             {
               role: "user",
-              content: "以下の連続した会話に対する適切な返答を1つ考えなさい.",
+              content: `以下の連続した会話に対する適切な返答を${lang}で1つ考えなさい.`,
             },
             {
               role: "user",
@@ -62,8 +63,6 @@ const MessageSuggestion = (props) => {
       setLoading(false);
     }
   };
-
-  console.log(props);
 
   useEffect(() => {
     db.collection("messages")
