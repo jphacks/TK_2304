@@ -1,12 +1,13 @@
 body {
-  background-color: #e5eaf5;
+  background-color: #f6f1f1;
   margin: 0;
   padding: 0;
 }
 
 .header {
-  background-color: #a28089;
-  color: white;
+  background-color: #afd3e2;
+  color: rgb(255, 255, 255);
+  opacity: 0.95;
   height: 75px;
   width: 100%;
   position: fixed;
@@ -36,16 +37,17 @@ p {
 }
 
 .msg {
+  background-color: #d3e9f3;
   display: flex;
   padding: 20px 10px 0 20px;
   margin: 20px;
   border-radius: 3000px;
-  box-shadow: 0 0 10px rgb(169, 163, 157);
+  box-shadow: 0 0 10px #afd3e2;
   align-items: center;
 }
 
 .sent {
-  background-color: #f75990;
+  background-color: #19a7ce;
   color: black;
   border-top-right-radius: 500px;
   flex-direction: row-reverse;
@@ -55,7 +57,7 @@ p {
 }
 
 .received {
-  background-color: #fafafa;
+  background-color: #afd3e2;
   border-top-left-radius: 500px;
   float: left;
 }
@@ -72,7 +74,7 @@ p {
   margin-left: -5px;
   padding: 10px;
   padding-bottom: 20px;
-  background-color: #fafafa;
+  background-color: #f0faff;
 }
 
 .msgs {
@@ -85,6 +87,15 @@ p {
   font-size: 14px; /* Adjust the font size as needed */
   color: gray; /* Set the text color to gray or any other preferred color */
   margin-top: 5px; /* Add margin to position it below the translation */
+}
+
+/* SignIn.js */
+.center-div-style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 @media (max-width: 775px) {
