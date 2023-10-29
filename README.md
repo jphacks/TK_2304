@@ -65,7 +65,7 @@
 git clone https://github.com/jphacks/TK_2304.git
 ```
 
-2. API keyのファイルを用意する. 指示に従って先の手順で入手したAPI keyを記入してください.
+2. API keyのファイルを用意する. 指示に従って先の手順で入手したAPI keyを記入する.
 ```bash
 python apikey.py
 ```
@@ -74,17 +74,23 @@ or
 python3 apikey.py
 ```
 
+以下のようにAPI keyを入力してください.
+```bash
+Please input your ChatGPT API key: !!!INPUT YOUR API KEY!!!
+Please input your Cloud Translation API key: !!!INPUT YOUR API KEY!!!
+```
+
 3. ディレクトリを`camembert-chat`に変更する.
 ```bash
 cd camembert-chat
 ```
 
-4. ライブラリをインストールする
+4. ライブラリをインストールする.
 ```bash
 npm install
 ```
 
-5. フロントエンドサーバーを立てる
+5. フロントエンドサーバーを立てる.
 ```bash
 npm start
 ```
