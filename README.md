@@ -31,8 +31,8 @@
 ## 開発技術
 ### 活用した技術
 #### API・データ
-* Cloud Translation API
 * ChatGPT API
+* Cloud Translation API
 
 #### フレームワーク・ライブラリ・モジュール
 * Firebase
@@ -41,6 +41,7 @@
 #### デバイス
 * Webブラウザ
 * npm version 10.1.0
+* Python 3.10.12
 
 ### 独自技術
 #### ハッカソンで開発した独自機能・技術
@@ -51,7 +52,12 @@
 ### 環境
 * OS: Ubuntu 22.04 or Windows 11 22H2 or Mac OS Monterey 12.6.7
 * npm version 10.1.0
+* Python 3.10.12
 * git version 2.34.1
+
+### 必要なAPI key
+* [Chat GPT API key](https://openai.com/product)
+* [Cloud Translation API key](https://cloud.google.com/translate)
 
 ### 手順
 1. 以下のコマンドで, このレポジトリをクローンする.
@@ -59,17 +65,26 @@
 git clone https://github.com/jphacks/TK_2304.git
 ```
 
-2. ディレクトリを`camembert-chat`に変更する
+2. API keyのファイルを用意する. 指示に従って先の手順で入手したAPI keyを記入してください.
+```bash
+python apikey.py
+```
+or
+```bash
+python3 apikey.py
+```
+
+3. ディレクトリを`camembert-chat`に変更する.
 ```bash
 cd camembert-chat
 ```
 
-3. ライブラリをインストールする
+4. ライブラリをインストールする
 ```bash
 npm install
 ```
 
-4. フロントエンドサーバーを立てる
+5. フロントエンドサーバーを立てる
 ```bash
 npm start
 ```
