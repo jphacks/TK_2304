@@ -3,10 +3,11 @@ import axios from "axios";
 import { db, auth } from "../firebase";
 import { Button, CircularProgress } from "@mui/material";
 import SendMessage from "./SendMessage"
+import ChatGPTApi from "../ChatGptApi";
 
 const API_URL = "https://api.openai.com/v1/";
 const MODEL = "gpt-3.5-turbo";
-const API_KEY = "";
+const API_KEY = ChatGPTApi();
 
 const MessageSuggestion = (props) => {
   const [messages, setMessages] = useState([]);
