@@ -104,31 +104,45 @@ function SendMessage() {
                 alignItems: "flex-end",
               }}
             >
-              <p
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontSize: "1rem",
-                  alignItems: "flex-end",
-                }}
-              >
-                Language/言語:
-              </p>
+              {selectedLanguage === "ja" && (
+                <p
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "1rem",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  Language
+                </p>
+              )}
+              {selectedLanguage === "en" && (
+                <p
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "1rem",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  言語
+                </p>
+              )}
               <ToggleButtonGroup
                 exclusive
                 value={selectedLanguage}
                 onChange={handleLanguageChange}
                 size="small"
               >
-                <ToggleButton value="ja">JP</ToggleButton>
-                <ToggleButton value="en">EN</ToggleButton>
+                <ToggleButton value="ja">日本語</ToggleButton>
+                <ToggleButton value="en">ENGLISH</ToggleButton>
               </ToggleButtonGroup>
             </Grid>
             <Grid item xs={8}>
               <TextField
                 id="standard-basic"
                 variant="standard"
-                label="Enter a message"
+                label= {(selectedLanguage === "ja") ? "メッセージを入力" : "Enter a text"}
                 type="text"
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}

@@ -35,7 +35,7 @@ const MessageSuggestion = (props) => {
           messages: [
             {
               role: "user",
-              content: `以下の連続した会話に対する適切な返答を${lang}で1つ考えなさい.`,
+              content: `以下の連続した会話に対する適切な返答を${lang}語で1つ考えなさい.`,
             },
             {
               role: "user",
@@ -43,7 +43,7 @@ const MessageSuggestion = (props) => {
             },
             {
               role: "system",
-              content: "2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい."
+              content: `2つの返答の間は#を使って分けなさい. 改行はしなさい. またメッセージは30文字以内にしなさい. ${lang}語で答えなさい`
             }
           ],
         },
@@ -76,7 +76,12 @@ const MessageSuggestion = (props) => {
 
   return (
     <div>
-      <Button onClick={getResponse} >Suggestion</Button>
+      {props.lang === "ja" && (
+        <Button onClick={getResponse} >おすすめ</Button>
+      )}
+      {props.lang === "en" && (
+        <Button onClick={getResponse} >Suggestion</Button>
+      )}
       {loading && (
         <CircularProgress></CircularProgress>
       )}
