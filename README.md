@@ -1,6 +1,8 @@
 # Camembert Chat (カマンベールチャット)
 
 [![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2023/07/JPHACKS2023_ogp.png)](https://www.youtube.com/watch?v=yYRQEdfGjEg)
+## 開発者
+佐藤 旅人, 福永 大
 
 ## 実際に使ってみる
 [アプリを試してみる！](https://camembert-chat.web.app/)
