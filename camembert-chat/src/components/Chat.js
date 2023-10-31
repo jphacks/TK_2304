@@ -1,18 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SignOut from "./SignOut";
 import { db, auth } from "../firebase";
 import SendMessage from "./SendMessage";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
+
   useEffect(() => {
-    db.collection("messages")
-      .orderBy("createdAt")
-      .limit(50)
-      .onSnapshot((snapshot) => {
-        setMessages(snapshot.docs.map((doc) => doc.data()));
-      });
+    const fetchMessages = () => {
+      db.collection("messages")
+        .orderBy("createdAt")
+        .limit(50)
+        .onSnapshot((snapshot) => {
+          setMessages(snapshot.docs.map((doc) => doc.data()));
+        });
+    };
+
+    fetchMessages();
+
+    // Scroll to the bottom of the chat when messages are updated
+    scrollToBottom();
   }, []);
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat when messages are updated
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div>
@@ -32,6 +52,7 @@ function Chat() {
             </div>
           </div>
         ))}
+        <div ref={messagesEndRef}></div>
       </div>
       <SendMessage></SendMessage>
     </div>
